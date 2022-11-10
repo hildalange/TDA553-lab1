@@ -6,7 +6,7 @@ public class Volvo240 extends Cars{
     
     
     public Volvo240(){
-        super("Volvo240", 4, 0, 100, Color.BLACK);
+        super("Volvo240", 4, 0, 100, Color.BLACK, 0, 0, "Höger");
         stopEngine();
     }
     public double speedFactor(){
