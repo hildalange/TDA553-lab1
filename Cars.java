@@ -47,6 +47,6 @@ public class Cars implements Movable{
         
     }
     public void turnRight(){
-        
+        System.out.println("Hej testar");
     }
 }
