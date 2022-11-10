@@ -3,7 +3,7 @@ import java.awt.*;
 public class Cars implements Movable{
     private final int nrDoors;
     private String modelName;
-    private double currentSpeed;
+    protected double currentSpeed;
     private double enginePower;
     private Color color;
 
@@ -45,6 +45,11 @@ public class Cars implements Movable{
 
     }
     public void turnLeft(){
+        
+    }
+    @Override
+    public void turnRight() {
+        // TODO Auto-generated method stub
         
     }
 }
