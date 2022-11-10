@@ -31,3 +31,4 @@ public class Volvo240 extends Cars{
         decrementSpeed(amount);
     }
 }
+
