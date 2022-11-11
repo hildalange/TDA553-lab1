@@ -5,8 +5,8 @@ public class Volvo240 extends Cars{
     public final static double trimFactor = 1.25;
     
     
-    public Volvo240(){
-        super("Volvo240", 4, 0, 100, Color.BLACK);
+    public Volvo240(double currentSpeed, double x, double y){
+        super("Volvo240", 4, currentSpeed, 100, Color.BLACK, x, y);
         stopEngine();
     }
     public double speedFactor(){

@@ -8,16 +8,19 @@ public class Cars implements Movable{
     private Color color;
     private double x;
     private double y;
-    public enum Direction {
+    private double[]direction = new double[]{x,y};
+    private int currentDirection = 0;
+
+    /*public enum Direction {
         NORTH,
         EAST,
         SOUTH,
         WEST;
     }
-    private Direction currentDirection;
+    private Direction currentDirection;*/
     
 
-    public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color){
+    public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y){
         this.modelName = modelName;
         this.nrDoors = nrDoors;
         this.currentSpeed = currentSpeed;
@@ -25,7 +28,7 @@ public class Cars implements Movable{
         this.color = color;
         this.x = 0;
         this.y = 0;
-        this.currentDirection = Direction.NORTH;
+        //this.currentDirection = Direction.NORTH;
     }
 
     public int getNrDoors(){
@@ -61,29 +64,61 @@ public class Cars implements Movable{
     }
 
     public void move(){
-        switch (this.currentDirection) {
+    /* switch (this.currentDirection) {
             case NORTH: {
                 y += currentSpeed;
             }
             case EAST: {
-                x -= currentSpeed;
+                x += currentSpeed;
             }
             case SOUTH: {
                 y -= currentSpeed;
             }
             case WEST: 
             default: {
-                x += currentSpeed;
+                x -= currentSpeed;
+            }
+        */     
+        switch (currentDirection){
+            case 0: {
+                this.y -= currentSpeed;
+                direction[1] = this.y;
+                break;
+            }
+            case 1: {
+                this.x += currentSpeed;
+                direction[0] = this.x;
+                break;
+            }
+            case 2: {
+                this.y += currentSpeed;
+                direction[1] = this.y;
+                break;
+            }
+            case 3: {
+                this.x -= currentSpeed;
+                direction[0] = this.x;
+                break;
+            }
+            default:{
+                break;
             }
         }
     }
+    
 
     public void turnLeft(){
-        
+        currentDirection --;
+        if (currentDirection == -1){
+            currentDirection = 3;
+        }
     }
 
     public void turnRight() {
-        
+        currentDirection ++;
+        if (currentDirection % 4 == 0){
+            currentDirection = 0;
+        }
     }
 
     public double getX() {
@@ -101,7 +136,5 @@ public class Cars implements Movable{
     public void setY(double y) {
         this.y = y;
     }
-    
-
     
 }
