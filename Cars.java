@@ -64,7 +64,8 @@ public class Cars implements Movable{
     }
 
     public void move(){
-    /* switch (this.currentDirection) {
+
+/* switch (this.currentDirection) {
             case NORTH: {
                 y += currentSpeed;
             }
@@ -78,7 +79,7 @@ public class Cars implements Movable{
             default: {
                 x -= currentSpeed;
             }
-        */     
+*/     
         switch (currentDirection){
             case 0: {
                 this.y -= currentSpeed;
@@ -100,13 +101,12 @@ public class Cars implements Movable{
                 direction[0] = this.x;
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
     }
     
-
     public void turnLeft(){
         currentDirection --;
         if (currentDirection == -1){
