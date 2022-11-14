@@ -11,15 +11,6 @@ public class Cars implements Movable{
     private double[]direction = new double[]{x,y};
     private int currentDirection = 0;
 
-    /*public enum Direction {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST;
-    }
-    private Direction currentDirection;*/
-    
-
     public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y){
         this.modelName = modelName;
         this.nrDoors = nrDoors;
@@ -28,7 +19,6 @@ public class Cars implements Movable{
         this.color = color;
         this.x = 0;
         this.y = 0;
-        //this.currentDirection = Direction.NORTH;
     }
 
     public int getNrDoors(){
@@ -64,22 +54,6 @@ public class Cars implements Movable{
     }
 
     public void move(){
-
-/* switch (this.currentDirection) {
-            case NORTH: {
-                y += currentSpeed;
-            }
-            case EAST: {
-                x += currentSpeed;
-            }
-            case SOUTH: {
-                y -= currentSpeed;
-            }
-            case WEST: 
-            default: {
-                x -= currentSpeed;
-            }
-*/     
         switch (currentDirection){
             case 0: {
                 this.y -= currentSpeed;
