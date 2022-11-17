@@ -29,4 +29,19 @@ public class Volvo240Test {
         assertEquals(7.0, car.getX());
     }
     
+    @Test
+    public void currentSpeed_should_increase_to_the_least_value(){
+        Volvo240 car = new Volvo240();
+        car.gas(1.0);
+        assertEquals(1.25, car.currentSpeed);
+    }
+
+    @Test
+    public void currentSpeed_should_decrease_to_the_greatest_value(){
+        Volvo240 car = new Volvo240();
+        car.setCurrentSpeed(2.0);
+        car.brake(1.0);
+        assertEquals(0.75, car.currentSpeed);
+
+    }
 }
