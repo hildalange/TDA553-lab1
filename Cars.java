@@ -6,8 +6,8 @@ public class Cars implements Movable{
     protected double currentSpeed;
     private double enginePower;
     private Color color;
-    private double x;
-    private double y;
+    protected static double x;
+    protected static double y;
     private double[]direction = new double[]{x,y};
     private int currentdirection = 0;
     
