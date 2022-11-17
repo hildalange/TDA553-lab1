@@ -1,0 +1,22 @@
+1. Explain how you chose the inheritance hierarchy in Task 1, making Explain how you chose the inheritance 
+hierarchy in Task 1, making reference to the Open-Closed Principle.
+
+För att undvika koddublicering, skapade vi en superklass Cars som innehåller gemensamma metoder och attribut 
+som både de två subklasserna Saab95 och Volvo240 skall innehålla. 
+Detta gör det möjligt att skapa fler objekt utifrån vår superklass Cars utan att behöva ändra den kod som redan 
+är skriven, till exempel om vi vill skapa en bilmodell Golf. Detta enligt OCP. 
+
+2. Explain how you implemented each of the sanity checks in Task 4.
+
+I metoderna skapade vi villkor som gjorde att den nuvarande hastigheten enbart ändrades
+om värdet vi skickade in var inom villkorens ramar. För att kolla att detta fungerade gjorde 
+separata testet för både Saab och Volvo där vi testade att ge metoderna olika värden som
+både var innanför och utanför villkoren. Ytterligare ett villkor var att den nuvarande
+hastigheten inte skulle överskrida enginepower eller noll och då applicerade vi villkor för
+detta. Så om den nuvarande hastigheten skulle gå utanför ramarna sattes hastigheten till
+antingen min eller max (noll eller enginepower). 
+
+Eftersom vi har villkor på argumenten som skickas in till ökning och minskning av den
+nuvarande hastigheten minskar inte hastigheten när vi säger att den skall öka. Detsamma
+gäller tvärtom, dvs ökar inte hastigheten när vi säger att den skall minska. Med andra ord,
+fungerar gas och brake som de ska. 
