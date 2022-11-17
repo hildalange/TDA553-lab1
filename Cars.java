@@ -6,19 +6,14 @@ public class Cars implements Movable{
     protected double currentSpeed;
     private double enginePower;
     private Color color;
-<<<<<<< Updated upstream
-
-    public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color){
-=======
-    private double x;
-    private double y;
+    protected static double x;
+    protected static double y;
     private double[]direction = new double[]{x,y};
     private int currentdirection = 0;
     
  
  
     public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y){
->>>>>>> Stashed changes
         this.modelName = modelName;
         this.nrDoors = nrDoors;
         this.currentSpeed = currentSpeed;
@@ -94,13 +89,6 @@ public class Cars implements Movable{
             currentdirection = 3;
         }
     }
-<<<<<<< Updated upstream
-   @Override
-    public void turnRight() {
-        // TODO Auto-generated method stub
-        
-
-=======
  
     public void turnRight() {
         currentdirection ++;
@@ -123,7 +111,6 @@ public class Cars implements Movable{
  
     public void setY(double y) {
         this.y = y;
->>>>>>> Stashed changes
     }
  
 }
