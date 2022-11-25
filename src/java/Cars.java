@@ -1,116 +1,40 @@
 import java.awt.*;
  
-public class Cars implements Movable{
-    private final int nrDoors;
-    private String modelName;
-    protected double currentSpeed;
-    private double enginePower;
-    private Color color;
-    protected static double x;
-    protected static double y;
-    private double[]direction = new double[]{x,y};
-    private int currentdirection = 0;
-    
- 
+public abstract class Cars extends Vehicle{
  
     public Cars(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y){
-        this.modelName = modelName;
-        this.nrDoors = nrDoors;
-        this.currentSpeed = currentSpeed;
-        this.enginePower = enginePower;
-        this.color = color;
-        this.x = 0;
-        this.y = 0;
+        super( modelName, nrDoors, currentSpeed, enginePower, color, x, y);
+    }
 
-    }
- 
-    public int getNrDoors(){
-        return this.nrDoors;
-    }
- 
-    public double getEnginePower(){
-        return this.enginePower;
-    }
- 
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
- 
-    public void setCurrentSpeed(double speed){
-        currentSpeed = speed;
-    }
- 
-    public Color getColor(){
-        return color;
-    }
- 
-    public void setColor(Color clr){
-	    color = clr;
-    }
- 
-    public void startEngine(){
-	    currentSpeed = 0.1;
-    }
- 
-    public void stopEngine(){
-	    currentSpeed = 0;
-    }
- 
-    public void move(){
-        switch (currentdirection) {
-            case 0: {
-                this.y -= currentSpeed;
-                direction[1] = this.y;
-                break;
-            }
-            case 1: {
-                this.x += currentSpeed;
-                direction[0] = this.x;
-                break;
-            }
-            case 2: {
-                y += currentSpeed;
-                direction[1] =this.y;
-                break;
-            }
-            case 3: {
-                x -= currentSpeed;
-                direction[0]= this.x;
-                break;
-            }
-            default:
-            break;
+    public void brake(double amount){
+        if (amount >= 0 && amount <= 1){
+            decrementSpeed(amount);
         }
     }
- 
-    public void turnLeft(){
-        currentdirection --;
-        if (currentdirection == -1){
-            currentdirection = 3;
+
+    public void gas(double amount){
+        if (amount >= 0 && amount <= 1){
+            incrementSpeed(amount);
         }
     }
- 
-    public void turnRight() {
-        currentdirection ++;
-        if (currentdirection % 4 == 0){
-            currentdirection = 0;
+
+    public abstract double speedFactor();
+
+    private void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        if (currentSpeed < 0){
+            currentSpeed = 0;
+        } else if (currentSpeed > getEnginePower()){
+            currentSpeed = getEnginePower();
         }
     }
- 
-    public double getX() {
-        return x;
+
+    private void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        if (currentSpeed < 0){
+            currentSpeed = 0;
+        } else if (currentSpeed > getEnginePower()){
+            currentSpeed = getEnginePower();
+        }
     }
- 
-    public double getY() {
-        return y;
-    }
- 
-    public void setX(double x) {
-        this.x = x;
-    }
- 
-    public void setY(double y) {
-        this.y = y;
-    }
- 
 }
