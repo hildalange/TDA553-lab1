@@ -16,6 +16,10 @@ public class RepairShop implements Load{
         this.color = color;
     }
 
+    public Truck checkDistanceToUnloadTransporter(Truck truck){
+        return null;
+    }
+
     @Override
     public Cars checkDistanceToLoadCar(Cars car) {
         // TODO Auto-generated method stub
