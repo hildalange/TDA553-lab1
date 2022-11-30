@@ -42,4 +42,33 @@ public class RepairShopTest {
         assertEquals(2, carOne.getY());
 
     }
+
+    @Test
+    public void carShop_could_not_load_more_cars_than_maximum(){
+        RepairShop shop = new RepairShop(0, 0, 2, "Shop", Color.red);
+        Saab95 carOne = new Saab95();
+        Volvo240 carTwo = new Volvo240();
+        Saab95 carThree = new Saab95();
+        shop.loadingCar(carOne);
+        shop.loadingCar(carTwo);
+        shop.loadingCar(carThree);
+        assertEquals(2, shop.listOfLoadedCarsInShop.size());
+        assertEquals(carTwo, shop.listOfLoadedCarsInShop.get(1));
+    }
+
+    @Test
+    public void if_carShop_unload_randomCar_a_new_can_be_load() {
+        RepairShop shop = new RepairShop(0, 0, 3, "Shop", Color.red);
+        Saab95 carOne = new Saab95();
+        Volvo240 carTwo = new Volvo240();
+        Volvo240 carThree = new Volvo240();
+        Saab95 carFour = new Saab95();
+        shop.loadingCar(carOne);
+        shop.loadingCar(carTwo);
+        shop.loadingCar(carThree);
+        shop.removingCar();
+        shop.loadingCar(carFour);
+        //System.out.println(shop.listOfLoadedCarsInShop);
+        assertEquals(true, shop.listOfLoadedCarsInShop.contains(carFour));
+    }
 }

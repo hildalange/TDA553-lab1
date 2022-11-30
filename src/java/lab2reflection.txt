@@ -1,0 +1,29 @@
+1. What is the contract for gas() and brake() in this type (for example Cars and Truck)? Do the implementations 
+in both Volvo and Scania follow this contract? Does your design follow the Liskov Substitution Principle?
+
+Vi såg att både Volvo och Saab har samma metoder och beteende för både gas() och brake() och därmed implementerade vi dessa
+metoder i subklassen Cars (som är subklass till superklass Vehicle). Så både Volvo och Saab ärver dessa metoder och uppfyller därmed
+kontraktet. 
+För Scania och CarTransporter skapade vi ytterliggare en subklass till Vehicle som vi kallar Truck. I denna klass implementerade
+vi gas() och brake() som två abstraktametoder för att sedan implementera Scania och CarTransporters egna beteenden. Därför
+uppfyller dessa också kontrakter som finns i Truck då båda subklasserna innehåller metoderna. 
+Vi anser att alla klasserna uppfyller the Liskov Substitution Principle för att Volvo och Saab har samma beetende som sin superklass 
+Cars och samma gäller för Scania och CarTransporter i Truck. Både Truck och Cars uppfyller samma beetende som sin superklass Vehicle. 
+
+2. How did you handle duplicated code between Scania, CarTransporter and RepairShop?
+
+Till en början skapade vi en superklass Truck för att skilja på bilar och ''lastbilar''. Truck gjordes till en abstraktklass 
+för att undvika kodduplicering mellan de objekt som sedan skapas, till exempel CarTransporter och Scania. 
+Vi märkte att CarTransporter och RepairShop hade liknande beetende, så därför skapade vi en interface vid namn Load där vi 
+implementerade de metoder som de har gemensamt. Detta för att sedan i de separata klasserna implementera efter beetende och 
+undvika kodduplicering.  
+Vi använde oss utav interface istället för subklasser för att en RepairShop inte är av typ Vehicle och för att
+försöka undvika subklassing i så hög utsträckning som möjligt. 
+
+3. Did you need to modify the design from Lab 1 in order to make these extensions? If so, how could you have notice that your
+design from Lab 1 did not follow the OCP before you started workning on Lab 2?
+
+Vi har inte behövt modifiera självaste koden men strukturen. Tidigare hade vi en superklass Cars som alla olika fordon ärvde utav. 
+Vi märkte när vi gjorde fler fordon att det var mycket svårare att utöka koden om man enbart hade en specifik superklass. Vi har gjort
+klasserna till abstrakta för att kunna utöka koden i subklasserna, men inte ändra självaste beetendet i superklassen.
+Våran förra kod var mer utformad för att skapa mer bilar och exakt den typen, inte för att skapa fler objekt med olika typer. 

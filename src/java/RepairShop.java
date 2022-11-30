@@ -56,7 +56,7 @@ public class RepairShop implements Load{
         if (carToLoad == car && listOfLoadedCarsInShop.size() < this.maximumCars){
             listOfLoadedCarsInShop.add(carToLoad);
             }
-        }
+    }
 
     @Override
     public void removingCar() {
@@ -69,6 +69,7 @@ public class RepairShop implements Load{
         }
         
     }
+    
     public Integer randomNumber(Integer carsInList){
         Random rand = new Random();
         int upperboard = carsInList;
