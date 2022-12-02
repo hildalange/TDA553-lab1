@@ -21,27 +21,29 @@ public class Volvo240Test {
         car.setColor(Color.red);;
         assertEquals(Color.red, car.getColor());
     }
-
-    @Test
-    public void car_should_change_coordinates() {
-        Volvo240 car = new Volvo240();
-        car.setX(7.0);
-        assertEquals(7.0, car.getX());
-    }
     
     @Test
-    public void currentSpeed_should_increase_to_the_least_value(){
+    public void currentSpeed_should_increase_when_calling_gas(){
         Volvo240 car = new Volvo240();
         car.gas(1.0);
-        assertEquals(1.25, car.currentSpeed);
+        assertEquals(1.25, car.getCurrentSpeed());
     }
 
     @Test
-    public void currentSpeed_should_decrease_to_the_greatest_value(){
+    public void currentSpeed_should_decrease_when_calling_brake(){
         Volvo240 car = new Volvo240();
-        car.setCurrentSpeed(2.0);
-        car.brake(1.0);
-        assertEquals(0.75, car.currentSpeed);
+        car.gas(1);
+        car.brake(0.5);
+        assertEquals(0.625, car.getCurrentSpeed());
 
+    }
+
+    @Test
+    public void car_should_move(){
+        Volvo240 car = new Volvo240();
+        car.gas(1);
+        car.move();
+        assertEquals(-1.25, car.getY());
+        
     }
 }

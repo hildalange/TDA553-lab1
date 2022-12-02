@@ -12,21 +12,21 @@ public class Saab95Test {
     @Test
     public void turbo_should_be_false() {
         Saab95 car = new Saab95();
-        assertEquals(false, car.turboOn);
+        assertEquals(false, car.getTurboOn());
     }
  
     @Test
     public void SetTurboOn_should_change_turboOn_to_true() {
         Saab95 car = new Saab95();
         car.setTurboOn();
-        assertEquals(true, car.turboOn);
+        assertEquals(true, car.getTurboOn());
     }
  
     @Test
     public void SetTurboOff_should_change_turboOn_to_false() {
         Saab95 car = new Saab95();
         car.setTurboOff();
-        assertEquals(false, car.turboOn);
+        assertEquals(false, car.getTurboOn());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class Saab95Test {
         Saab95 car = new Saab95();
         car.setTurboOn();
         car.gas(0.5);
-        assertEquals(0.8125, car.currentSpeed);
+        assertEquals(0.8125, car.getCurrentSpeed());
     }
 
     @Test
@@ -50,24 +50,15 @@ public class Saab95Test {
         Saab95 car = new Saab95();
         car.setTurboOn();
         car.gas(2);
-        assertEquals(0, car.currentSpeed);
+        assertEquals(0, car.getCurrentSpeed());
     }
 
     @Test
     public void currentSpeed_should_decrease_when_calling_brake_with_value_between_zero_and_one(){
         Saab95 car = new Saab95();
-        car.setCurrentSpeed(10.0);
         car.setTurboOn();
+        car.gas(1);
         car.brake(0.5);
-        assertEquals(9.1875, car.currentSpeed);
-    }
-
-    @Test
-    public void currentSpeed_should_not_exceed_its_parameters(){
-        Saab95 car = new Saab95();
-        car.setTurboOn();
-        car.setCurrentSpeed(125);
-        car.gas(1.0);
-        assertEquals(125, car.currentSpeed);
+        assertEquals(0.8125, car.getCurrentSpeed());
     }
 }

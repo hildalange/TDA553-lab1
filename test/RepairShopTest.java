@@ -68,7 +68,6 @@ public class RepairShopTest {
         shop.loadingCar(carThree);
         shop.removingCar();
         shop.loadingCar(carFour);
-        //System.out.println(shop.listOfLoadedCarsInShop);
         assertEquals(true, shop.listOfLoadedCarsInShop.contains(carFour));
     }
 }

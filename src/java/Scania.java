@@ -2,7 +2,7 @@ import java.awt.*;;
 
 public class Scania extends Truck {
 
-    public double platformAngle;
+    private double platformAngle;
 
     public Scania() {
         super("Scania", 2, 0, 125, Color.yellow, 0, 0);
@@ -10,7 +10,7 @@ public class Scania extends Truck {
     }
 
     public void raisePlatform() {
-        if (currentSpeed == 0){
+        if (getCurrentSpeed() == 0){
 
             if (platformAngle < 70){
                 platformAngle += 10;
@@ -21,7 +21,7 @@ public class Scania extends Truck {
     }
 
     public void lowerPlatform () {
-        if (currentSpeed == 0){
+        if (getCurrentSpeed() == 0){
 
             if (platformAngle <= 0){
                 platformAngle = 0;
@@ -36,19 +36,25 @@ public class Scania extends Truck {
     @Override
     public void gas(){
         if (platformAngle > 0){
-            currentSpeed = 0;
+            setCurrentSpeed(0);
         } else {
-            currentSpeed += 10;
+            double newSpeed = getCurrentSpeed() + 10;
+            setCurrentSpeed(newSpeed);
         }
     }
 
     @Override
     public void brake(){
         if (platformAngle > 0){
-            currentSpeed = 0;
+          setCurrentSpeed(0);
         } else {
-            currentSpeed -= 10;
+            double newSpeed = getCurrentSpeed() - 10;
+            setCurrentSpeed(newSpeed);
         }
+    }
+
+    public double getPlatformAngle(){
+        return this.platformAngle;
     }
 
 }

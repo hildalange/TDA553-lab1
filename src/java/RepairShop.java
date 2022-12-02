@@ -9,7 +9,7 @@ public class RepairShop implements Load{
     private int maximumCars;
     private String modelName;
     private Color color;
-    public ArrayList<Cars> listOfLoadedCarsInShop = new ArrayList<Cars>();
+    public ArrayList<Car> listOfLoadedCarsInShop = new ArrayList<Car>();
 
     public RepairShop(double x, double y, int maximumCars, String modelName, Color color){
         this.x = x;
@@ -19,15 +19,31 @@ public class RepairShop implements Load{
         this.color = color;
     }
 
+    public double getX() {
+        return x;
+    }
+ 
+    public double getY() {
+        return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+ 
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public int getMaximumOfCars() {
         return this.maximumCars;
     }
 
     @Override
-    public Cars checkDistanceToLoadCar(Cars car) {
+    public Car checkDistanceToLoadCar(Car car) {
         double distanceOfX = this.x - car.getX();
         double distanceOfY = this.y - car.getY();
-        Cars pickMeUp = null;
+        Car pickMeUp = null;
 
         if (distanceOfX < 0){
             distanceOfX = -1 * distanceOfX;
@@ -44,14 +60,17 @@ public class RepairShop implements Load{
     }
 
     @Override
-    public void removedCarShouldEndUp(Cars car) {
-        car.x = this.x + 2;
-        car.y = this.y + 2;
+    public void removedCarShouldEndUp(Car car) {
+        double XCoordinate = this.getX() + 2;
+        double YCoordinate = this.getY() + 2;
+
+        car.setX(XCoordinate);
+        car.setY(YCoordinate);
     }
 
     @Override
-    public void loadingCar(Cars car) {
-        Cars carToLoad = checkDistanceToLoadCar(car);
+    public void loadingCar(Car car) {
+        Car carToLoad = checkDistanceToLoadCar(car);
 
         if (carToLoad == car && listOfLoadedCarsInShop.size() < this.maximumCars){
             listOfLoadedCarsInShop.add(carToLoad);
@@ -60,7 +79,7 @@ public class RepairShop implements Load{
 
     @Override
     public void removingCar() {
-        Cars removed_car = null;
+        Car removed_car = null;
 
         if (listOfLoadedCarsInShop.size() > 0){
             int random_num = randomNumber(listOfLoadedCarsInShop.size());

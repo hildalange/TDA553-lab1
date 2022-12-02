@@ -2,29 +2,27 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CarTransporter extends Truck implements Load{
- 
-    public double carsLoaded;
-    public boolean flatbedUp;
-    public ArrayList<Cars> listOfLoadedCars = new ArrayList<Cars>();
+    
+    private boolean flatbedUp;
+    public ArrayList<Car> listOfLoadedCars = new ArrayList<Car>();
 
     public CarTransporter(){
         super("CarTransporter", 2, 0, 125, Color.blue, 0, 0);
-        carsLoaded = 0;
         flatbedUp = true;
     }
 
     public boolean flatbedDown(){
-        if (currentSpeed == 0){
+        if (this.getCurrentSpeed() == 0){
             flatbedUp = false;
         }
         return flatbedUp;
     }
 
     @Override
-    public Cars checkDistanceToLoadCar(Cars car){
-        double distanceOfX = this.x - car.getX();
-        double distanceOfY = this.y - car.getY();
-        Cars pickMeUp = null;
+    public Car checkDistanceToLoadCar(Car car){
+        double distanceOfX = this.getX() - car.getX();
+        double distanceOfY = this.getY() - car.getY();
+        Car pickMeUp = null;
 
         if (distanceOfX < 0){
             distanceOfX = -1 * distanceOfX;
@@ -41,14 +39,19 @@ public class CarTransporter extends Truck implements Load{
     }
 
     @Override
-    public void removedCarShouldEndUp(Cars car){
-        car.x = this.x + 2;
-        car.y = this.y + 2;
+    public void removedCarShouldEndUp(Car car){
+        double XCoordinate = this.getX() + 2;
+        double YCoordinate = this.getY() + 2;
+
+        car.setX(XCoordinate);
+        car.setY(YCoordinate);
     } 
 
+
+
     @Override
-    public void loadingCar(Cars car) {
-        Cars carToLoad = checkDistanceToLoadCar(car);
+    public void loadingCar(Car car) {
+        Car carToLoad = checkDistanceToLoadCar(car);
 
         if (carToLoad == car && flatbedDown() == false){
             if (listOfLoadedCars.size() < 2){
@@ -59,7 +62,7 @@ public class CarTransporter extends Truck implements Load{
 
     @Override
     public void removingCar(){
-        Cars removed_car = null;
+        Car removed_car = null;
 
         if (flatbedDown() == false && listOfLoadedCars.size() > 0){
             if (listOfLoadedCars.size() == 2){
@@ -75,19 +78,25 @@ public class CarTransporter extends Truck implements Load{
     @Override
     public void gas(){
         if (flatbedUp == false){
-            currentSpeed = 0;
+            setCurrentSpeed(0);
         } else {
-            currentSpeed += 10;
+            double newSpeed = getCurrentSpeed() + 10;
+            setCurrentSpeed(newSpeed);
         }
     }
 
     @Override
     public void brake(){
         if (flatbedUp == false){
-            currentSpeed = 0;
+            setCurrentSpeed(0);
         } else {
-            currentSpeed -= 10;
+            double newSpeed = getCurrentSpeed() - 10;
+            setCurrentSpeed(newSpeed);
         }
+    }
+
+    public boolean getFlatbedUp(){
+        return this.flatbedUp;
     }
 
 }

@@ -1,6 +1,6 @@
 public interface Load {
-    Cars checkDistanceToLoadCar(Cars car);
-    void removedCarShouldEndUp(Cars car);
-    void loadingCar(Cars car);
+    Car checkDistanceToLoadCar(Car car);
+    void removedCarShouldEndUp(Car car);
+    void loadingCar(Car car);
     void removingCar();
 }

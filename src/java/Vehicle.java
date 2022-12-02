@@ -4,11 +4,11 @@ public abstract class Vehicle implements Movable{
 
     private final int nrDoors;
     private String modelName;
-    protected double currentSpeed;
+    private double currentSpeed;
     private double enginePower;
     private Color color;
-    public double x;
-    public double y; 
+    private double x;
+    private double y; 
     private double[]direction = new double[]{x,y};
     private int currentdirection = 0;
  
@@ -28,13 +28,15 @@ public abstract class Vehicle implements Movable{
     public double getEnginePower(){
         return this.enginePower;
     }
- 
+    
     public double getCurrentSpeed(){
-        return currentSpeed;
+        return this.currentSpeed;
     }
- 
+
     public void setCurrentSpeed(double speed){
-        currentSpeed = speed;
+        if (getCurrentSpeed() < getEnginePower() && getCurrentSpeed() >= 0){
+            this.currentSpeed = speed;
+        }
     }
  
     public Color getColor(){
@@ -60,7 +62,7 @@ public abstract class Vehicle implements Movable{
     public double getY() {
         return y;
     }
- 
+
     public void setX(double x) {
         this.x = x;
     }
@@ -68,7 +70,7 @@ public abstract class Vehicle implements Movable{
     public void setY(double y) {
         this.y = y;
     }
-
+ 
     @Override
     public void move(){
         switch (currentdirection) {
