@@ -17,7 +17,7 @@ public class RepairShopTest {
         Volvo240 carTwo = new Volvo240();
         shop.loadingCar(carOne);
         shop.loadingCar(carTwo);
-        assertEquals(2, shop.listOfLoadedCarsInShop.size());
+        assertEquals(2, shop.getList().size());
     }
     
     @Test
@@ -29,8 +29,9 @@ public class RepairShopTest {
         shop.loadingCar(carOne);
         shop.loadingCar(carTwo);
         shop.loadingCar(carThree);
+        System.out.println(shop.getList());
         shop.removingCar();
-        assertEquals(2, shop.listOfLoadedCarsInShop.size());
+        assertEquals(2, shop.getList().size());
     }
 
     @Test
@@ -52,8 +53,8 @@ public class RepairShopTest {
         shop.loadingCar(carOne);
         shop.loadingCar(carTwo);
         shop.loadingCar(carThree);
-        assertEquals(2, shop.listOfLoadedCarsInShop.size());
-        assertEquals(carTwo, shop.listOfLoadedCarsInShop.get(1));
+        assertEquals(2, shop.getList().size());
+        assertEquals(carTwo, shop.getList().get(1));
     }
 
     @Test
@@ -68,6 +69,20 @@ public class RepairShopTest {
         shop.loadingCar(carThree);
         shop.removingCar();
         shop.loadingCar(carFour);
-        assertEquals(true, shop.listOfLoadedCarsInShop.contains(carFour));
+        assertEquals(true, shop.getList().contains(carFour));
+    }
+
+    @Test
+    public void same_list(){
+        RepairShop shop = new RepairShop(0, 0, 2, "Shop", Color.red);
+        CarTransporter transporter = new CarTransporter();
+        Volvo240 carThree = new Volvo240();
+        Saab95 carFour = new Saab95();
+        transporter.flatbedDown();
+        shop.loadingCar(carThree);
+        transporter.loadingCar(carFour);
+
+        assertEquals(1, shop.getList().size());
+        assertEquals(1, transporter.getList().size());
     }
 }

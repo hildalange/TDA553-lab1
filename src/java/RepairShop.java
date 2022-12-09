@@ -2,14 +2,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RepairShop implements Load{
+public class RepairShop{
+
+    Contents content = new Contents();
 
     private double x;
     private double y;
     private int maximumCars;
     private String modelName;
     private Color color;
-    public ArrayList<Car> listOfLoadedCarsInShop = new ArrayList<Car>();
 
     public RepairShop(double x, double y, int maximumCars, String modelName, Color color){
         this.x = x;
@@ -19,6 +20,10 @@ public class RepairShop implements Load{
         this.color = color;
     }
 
+    public ArrayList<Car> getList() {
+        return content.getList();
+    }
+    
     public double getX() {
         return x;
     }
@@ -39,52 +44,28 @@ public class RepairShop implements Load{
         return this.maximumCars;
     }
 
-    @Override
     public Car checkDistanceToLoadCar(Car car) {
         double distanceOfX = this.x - car.getX();
         double distanceOfY = this.y - car.getY();
-        Car pickMeUp = null;
-
-        if (distanceOfX < 0){
-            distanceOfX = -1 * distanceOfX;
-        }
-        if (distanceOfY < 0){
-            distanceOfY = -1 * distanceOfY;
-        }
-
-        if (distanceOfY <= 3 && distanceOfX <= 3 && distanceOfX >= 0 && distanceOfY >= 0){
-            pickMeUp = car;
-        }
         
-        return pickMeUp;
+        return this.content.checkDistanceToLoadCar(car, distanceOfX, distanceOfY);
     }
 
-    @Override
-    public void removedCarShouldEndUp(Car car) {
-        double XCoordinate = this.getX() + 2;
-        double YCoordinate = this.getY() + 2;
-
-        car.setX(XCoordinate);
-        car.setY(YCoordinate);
-    }
-
-    @Override
     public void loadingCar(Car car) {
         Car carToLoad = checkDistanceToLoadCar(car);
 
-        if (carToLoad == car && listOfLoadedCarsInShop.size() < this.maximumCars){
-            listOfLoadedCarsInShop.add(carToLoad);
+        if (carToLoad == car && this.getList().size() < this.maximumCars){
+            this.content.loadingCar(carToLoad);
             }
     }
 
-    @Override
     public void removingCar() {
         Car removed_car = null;
 
-        if (listOfLoadedCarsInShop.size() > 0){
-            int random_num = randomNumber(listOfLoadedCarsInShop.size());
-            removed_car = listOfLoadedCarsInShop.remove(random_num);
-            removedCarShouldEndUp(removed_car);
+        if (getList().size() > 0){
+            int random_num = randomNumber(getList().size());
+            removed_car = getList().remove(random_num);
+            this.content.removedCarShouldEndUp(removed_car);
         }
         
     }

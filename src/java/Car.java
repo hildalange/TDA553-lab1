@@ -6,12 +6,14 @@ public abstract class Car extends Vehicle{
         super( modelName, nrDoors, currentSpeed, enginePower, color, x, y);
     }
 
+    @Override
     public void brake(double amount){
         if (amount >= 0 && amount <= 1){
             decrementSpeed(amount);
         }
     }
-
+    
+    @Override
     public void gas(double amount){
         if (amount >= 0 && amount <= 1){
             incrementSpeed(amount);
@@ -22,24 +24,24 @@ public abstract class Car extends Vehicle{
 
     private void incrementSpeed(double amount){
         double newSpeed = getCurrentSpeed() + speedFactor() * amount;
-        setCurrentSpeed(newSpeed);
+        changeCurrentSpeed(newSpeed);
         if (getCurrentSpeed() < 0){
-            setCurrentSpeed(0);
+            changeCurrentSpeed(0);
         } else if (getCurrentSpeed() > getEnginePower()){
             newSpeed = getEnginePower();
-            setCurrentSpeed(newSpeed);
+            changeCurrentSpeed(newSpeed);
         }
     }
 
     private void decrementSpeed(double amount){
         double newSpeed = getCurrentSpeed() - speedFactor() * amount;
-        setCurrentSpeed(newSpeed);
+        changeCurrentSpeed(newSpeed);
 
         if (getCurrentSpeed() < 0){
-            setCurrentSpeed(0);
+            changeCurrentSpeed(0);
         } else if (getCurrentSpeed() > getEnginePower()){
             newSpeed = getEnginePower();
-            setCurrentSpeed(newSpeed);
+            changeCurrentSpeed(newSpeed);
         }
     }
 }

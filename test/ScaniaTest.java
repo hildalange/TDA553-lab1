@@ -46,7 +46,7 @@ public class ScaniaTest {
     @Test
     public void platform_should_not_raise_or_low_when_car_is_moving(){
         Scania car = new Scania();
-        car.gas();
+        car.gas(10);
         car.raisePlatform();
         assertEquals(0, car.getPlatformAngle());
     }
@@ -57,14 +57,14 @@ public class ScaniaTest {
         for (int i = 1; i <= 2; i++ ){
             car.raisePlatform();
         }
-        car.gas();
+        car.gas(10);
         assertEquals(0, car.getCurrentSpeed());
     }
 
     @Test
     public void current_speed_should_increase_when_calling_gas(){
         Scania car = new Scania();
-        car.gas();
+        car.gas(10);
         assertEquals(10, car.getCurrentSpeed());
     }
 
@@ -72,7 +72,7 @@ public class ScaniaTest {
     public void should_not_be_able_to_brake_when_ramp_is_up(){
         Scania car = new Scania();
         car.raisePlatform();
-        car.brake();
+        car.brake(10);
         assertEquals(0, car.getCurrentSpeed());
     }
 
@@ -80,7 +80,7 @@ public class ScaniaTest {
     public void car_should_turn_left(){
         Scania car = new Scania();
         car.turnLeft();
-        car.gas();
+        car.gas(10);
         car.move();
         assertEquals(-10, car.getX());
     }
@@ -89,7 +89,7 @@ public class ScaniaTest {
     public void car_should_turn_right(){
         Scania car = new Scania();
         car.turnRight();
-        car.gas();
+        car.gas(10);
         car.move();
         assertEquals(10, car.getX());
     }

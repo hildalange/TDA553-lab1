@@ -1,97 +1,76 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarTransporter extends Truck implements Load{
+public class CarTransporter extends Vehicle{
+
+    Contents content = new Contents();
     
     private boolean flatbedUp;
-    public ArrayList<Car> listOfLoadedCars = new ArrayList<Car>();
 
     public CarTransporter(){
         super("CarTransporter", 2, 0, 125, Color.blue, 0, 0);
         flatbedUp = true;
     }
 
-    public boolean flatbedDown(){
+    public void flatbedDown(){
         if (this.getCurrentSpeed() == 0){
             flatbedUp = false;
         }
-        return flatbedUp;
     }
 
-    @Override
+    public void raiseflatbed(){
+        if (this.getCurrentSpeed() == 0){
+            flatbedUp = true;
+        }
+    }
+
+    public ArrayList<Car> getList() {
+        return content.getList();
+    }
+
     public Car checkDistanceToLoadCar(Car car){
         double distanceOfX = this.getX() - car.getX();
         double distanceOfY = this.getY() - car.getY();
-        Car pickMeUp = null;
 
-        if (distanceOfX < 0){
-            distanceOfX = -1 * distanceOfX;
-        }
-        if (distanceOfY < 0){
-            distanceOfY = -1 * distanceOfY;
-        }
-
-        if (distanceOfY <= 3 && distanceOfX <= 3 && distanceOfX >= 0 && distanceOfY >= 0){
-            pickMeUp = car;
-        }
-        
-        return pickMeUp;
+        return this.content.checkDistanceToLoadCar(car, distanceOfX, distanceOfY);
     }
+      
 
-    @Override
-    public void removedCarShouldEndUp(Car car){
-        double XCoordinate = this.getX() + 2;
-        double YCoordinate = this.getY() + 2;
-
-        car.setX(XCoordinate);
-        car.setY(YCoordinate);
-    } 
-
-
-
-    @Override
     public void loadingCar(Car car) {
         Car carToLoad = checkDistanceToLoadCar(car);
 
-        if (carToLoad == car && flatbedDown() == false){
-            if (listOfLoadedCars.size() < 2){
-                listOfLoadedCars.add(car);
-            }
+        if (carToLoad == car && this.flatbedUp == false){
+            if (this.getList().size() < 2){
+            content.loadingCar(carToLoad);
         }
-    }
+    }}
 
-    @Override
     public void removingCar(){
         Car removed_car = null;
 
-        if (flatbedDown() == false && listOfLoadedCars.size() > 0){
-            if (listOfLoadedCars.size() == 2){
-                removed_car = listOfLoadedCars.remove(1);
-                removedCarShouldEndUp(removed_car);
-            } else {
-                removed_car = listOfLoadedCars.remove(0);
-                removedCarShouldEndUp(removed_car);
-            }   
+        if (this.flatbedUp == false && getList().size() > 0){
+            content.removingCar(removed_car);
         }
     }
 
     @Override
-    public void gas(){
-        if (flatbedUp == false){
-            setCurrentSpeed(0);
+    public void gas(double amount){
+        if (this.flatbedUp == false){
+            changeCurrentSpeed(0);
         } else {
-            double newSpeed = getCurrentSpeed() + 10;
-            setCurrentSpeed(newSpeed);
+            double newSpeed = getCurrentSpeed() + amount;
+            changeCurrentSpeed(newSpeed);
         }
     }
 
     @Override
-    public void brake(){
+    public void brake(double amount){
         if (flatbedUp == false){
-            setCurrentSpeed(0);
+            changeCurrentSpeed(0);
+
         } else {
-            double newSpeed = getCurrentSpeed() - 10;
-            setCurrentSpeed(newSpeed);
+            double newSpeed = getCurrentSpeed() - amount;
+            changeCurrentSpeed(newSpeed);
         }
     }
 

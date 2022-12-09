@@ -19,7 +19,7 @@ public class CarTransporterTest {
         transporter.loadingCar(carOne);
         transporter.loadingCar(carTwo);
         transporter.loadingCar(carThree);
-        assertEquals(carTwo, transporter.listOfLoadedCars.get(1));
+        assertEquals(carTwo, transporter.getList().get(1));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class CarTransporterTest {
         transporter.loadingCar(carOne);
         transporter.loadingCar(carTwo);
         transporter.removingCar();
-        assertEquals(carOne, transporter.listOfLoadedCars.get(0));
+        assertEquals(carOne, transporter.getList().get(0));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CarTransporterTest {
         carOne.setX(10);
         carOne.setY(10);
         transporter.loadingCar(carOne);
-        assertEquals(0, transporter.listOfLoadedCars.size());
+        assertEquals(0, transporter.getList().size());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class CarTransporterTest {
     @Test
     public void carTransporter_should_not_be_able_to_lower_flatbed_while_moving(){
         CarTransporter transporter = new CarTransporter();
-        transporter.setCurrentSpeed(5);
+        transporter.changeCurrentSpeed(5);;
         transporter.flatbedDown();
         assertEquals(true, transporter.getFlatbedUp());
     }
@@ -67,7 +67,7 @@ public class CarTransporterTest {
     public void if_flatbed_is_down_car_should_not_move(){
         CarTransporter transporter = new CarTransporter();
         transporter.flatbedDown();
-        transporter.gas();
+        transporter.gas(10);
         assertEquals(0, transporter.getCurrentSpeed());
     }
 

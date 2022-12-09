@@ -1,8 +1,9 @@
 import java.awt.*;;
 
-public class Scania extends Truck {
+public class Scania extends Vehicle {
 
     private double platformAngle;
+    public int amount;
 
     public Scania() {
         super("Scania", 2, 0, 125, Color.yellow, 0, 0);
@@ -34,22 +35,22 @@ public class Scania extends Truck {
     }
 
     @Override
-    public void gas(){
+    public void gas(double amount){
         if (platformAngle > 0){
-            setCurrentSpeed(0);
+            changeCurrentSpeed(0);
         } else {
-            double newSpeed = getCurrentSpeed() + 10;
-            setCurrentSpeed(newSpeed);
+            double newSpeed = getCurrentSpeed() + amount;
+            changeCurrentSpeed(newSpeed);
         }
     }
 
     @Override
-    public void brake(){
+    public void brake(double amount){
         if (platformAngle > 0){
-          setCurrentSpeed(0);
+          changeCurrentSpeed(0);
         } else {
-            double newSpeed = getCurrentSpeed() - 10;
-            setCurrentSpeed(newSpeed);
+            double newSpeed = getCurrentSpeed() - amount;
+            changeCurrentSpeed(newSpeed);
         }
     }
 

@@ -21,6 +21,7 @@ public abstract class Vehicle implements Movable{
         this.x = x;
         this.y = y;
     }
+
     public int getNrDoors(){
         return this.nrDoors;
     }
@@ -33,10 +34,14 @@ public abstract class Vehicle implements Movable{
         return this.currentSpeed;
     }
 
-    public void setCurrentSpeed(double speed){
+    private void setCurrentSpeed(double speed){
         if (getCurrentSpeed() < getEnginePower() && getCurrentSpeed() >= 0){
             this.currentSpeed = speed;
         }
+    }
+
+    public void changeCurrentSpeed(double speed){
+        setCurrentSpeed(speed);
     }
  
     public Color getColor(){
@@ -114,5 +119,13 @@ public abstract class Vehicle implements Movable{
             currentdirection = 0;
         }
     }
+
+    public String getName() {
+        return this.modelName;
+    }
+    
+    public abstract void gas(double amount);
+    
+    public abstract void brake(double amount);
     
 }
