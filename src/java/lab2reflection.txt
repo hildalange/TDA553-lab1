@@ -4,11 +4,14 @@ in both Volvo and Scania follow this contract? Does your design follow the Lisko
 Vi såg att både Volvo och Saab har samma metoder och beteende för både gas() och brake() och därmed implementerade vi dessa
 metoder i subklassen Cars (som är subklass till superklass Vehicle). Så både Volvo och Saab ärver dessa metoder och uppfyller därmed
 kontraktet. 
+
 För Scania och CarTransporter skapade vi ytterliggare en subklass till Vehicle som vi kallar Truck. I denna klass implementerade
-vi gas() och brake() som två abstraktametoder för att sedan implementera Scania och CarTransporters egna beteenden. Därför
-uppfyller dessa också kontrakter som finns i Truck då båda subklasserna innehåller metoderna. 
+vi gas() och brake() som två abstraktametoder för att sedan kunna implementera Scania och CarTransporters egna beteenden. I Scania och 
+CarTransporter har vi ytterliggare ett villkor som alltid måste vara uppfyllt för att kontraktet i Vehicle skall vara uppfyllt.
+Detta är att plattformen/flatbed ska vara uppe. 
+
 Vi anser att alla klasserna uppfyller the Liskov Substitution Principle för att Volvo och Saab har samma beetende som sin superklass 
-Cars och samma gäller för Scania och CarTransporter i Truck. Både Truck och Cars uppfyller samma beetende som sin superklass Vehicle. 
+Car och samma gäller för Scania och CarTransporter i Truck. 
 
 2. How did you handle duplicated code between Scania, CarTransporter and RepairShop?
 
