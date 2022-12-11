@@ -73,6 +73,7 @@ public abstract class Vehicle implements Movable, IPositionable{
 
     public void setX(double x) {
         this.x = x;
+
     }
  
     public void setY(double y) {
@@ -126,7 +127,7 @@ public abstract class Vehicle implements Movable, IPositionable{
     public String getName() {
         return this.modelName;
     }
-
+/* 
     public boolean isGasValid(double amount){
         
         if (amount >= 0 && amount <= 1){
@@ -134,12 +135,15 @@ public abstract class Vehicle implements Movable, IPositionable{
         } else {
             return false;
         }
-   }
+   }*/
+
+    abstract boolean isGasValid(double amount);
 
     public void gas(double amount){
-       if (isGasValid(amount) == true){
+    
+        if (isGasValid(amount) == true){
            incrementSpeed(amount);
-       }
+        }
    }
 
     private void incrementSpeed(double amount){

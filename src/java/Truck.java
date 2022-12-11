@@ -6,17 +6,11 @@ public abstract class Truck extends Vehicle {
 
     public Truck(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y) {
         super(modelName, nrDoors, currentSpeed, enginePower, color, x, y);
-        this.platformAngle = 0;
     }
 
-    public double getPlatformAngle() {
-        return this.platformAngle;
-    }
+    abstract boolean isGasValid(double amount);
 
-    protected double setPlatformAngle(double platformAngle){
-        return this.platformAngle = platformAngle;
-    }
-
+/* 
     @Override
     public boolean isGasValid(double amount) {
         if(amount >= 0 && amount <= 1 && this.platformAngle == 0) {
@@ -24,7 +18,7 @@ public abstract class Truck extends Vehicle {
         } else {
             return false;
         }
-    }
+    }*/
     
     @Override
     public double speedFactor(){

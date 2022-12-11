@@ -60,7 +60,7 @@ public class CarTransporterTest {
         CarTransporter transporter = new CarTransporter();
         transporter.changeCurrentSpeed(5);
         transporter.flatbedDown();
-        assertEquals(0, transporter.getPlatformAngle());
+        assertEquals(0, transporter.getFlatbedAngle());
     }
 
     @Test
@@ -70,16 +70,4 @@ public class CarTransporterTest {
         transporter.gas(1);
         assertEquals(0, transporter.getCurrentSpeed());
     }
-
-    @Test
-    public void if_CT_has_a_car_car_should_move(){
-        CarTransporter transporter = new CarTransporter();
-        Saab95 carOne = new Saab95();
-        transporter.flatbedDown();
-        transporter.loadingCar(carOne);
-        transporter.setX(20);
-        assertEquals(20, carOne.getX());
-    }
-
-
 }
