@@ -2,9 +2,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RepairShop{
+public class RepairShop implements IPositionable{
 
-    Contents content = new Contents();
+    private Contents repairShopContents;
 
     private double x;
     private double y;
@@ -12,22 +12,25 @@ public class RepairShop{
     private String modelName;
     private Color color;
 
-    public RepairShop(double x, double y, int maximumCars, String modelName, Color color){
+    public RepairShop(double x, double y, String modelName, Color color){
         this.x = x;
         this.y = y;
-        this.maximumCars = maximumCars;
+        this.maximumCars = 2;
         this.modelName = modelName;
         this.color = color;
+        this.repairShopContents = new Contents(this);
     }
 
     public ArrayList<Car> getList() {
-        return content.getList();
+        return repairShopContents.getList();
     }
     
+    @Override
     public double getX() {
         return x;
     }
- 
+    
+    @Override
     public double getY() {
         return y;
     }
@@ -48,26 +51,22 @@ public class RepairShop{
         double distanceOfX = this.x - car.getX();
         double distanceOfY = this.y - car.getY();
         
-        return this.content.checkDistanceToLoadCar(car, distanceOfX, distanceOfY);
+        return repairShopContents.checkDistanceToLoadCar(car, distanceOfX, distanceOfY);
     }
 
     public void loadingCar(Car car) {
         Car carToLoad = checkDistanceToLoadCar(car);
 
         if (carToLoad == car && this.getList().size() < this.maximumCars){
-            this.content.loadingCar(carToLoad);
+            repairShopContents.loadingCar(carToLoad);
             }
     }
 
     public void removingCar() {
-        Car removed_car = null;
-
-        if (getList().size() > 0){
-            int random_num = randomNumber(getList().size());
-            removed_car = getList().remove(random_num);
-            this.content.removedCarShouldEndUp(removed_car);
+        if (repairShopContents.hasCars()){
+            Car removed_car = repairShopContents.removingCar();
+            repairShopContents.removedCarShouldEndUp(removed_car);
         }
-        
     }
     
     public Integer randomNumber(Integer carsInList){

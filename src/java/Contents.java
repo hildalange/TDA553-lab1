@@ -1,30 +1,39 @@
 import java.util.ArrayList;
 
 public class Contents {
-
+    private static int MAX_CARS = 2;
     private ArrayList<Car> listOfLoadedCars = new ArrayList<Car>();
+    private IPositionable position;
+
+    public Contents(IPositionable p){
+        this.listOfLoadedCars = new ArrayList<Car>();
+        this.position = p;
+    }
+
+    public boolean hasCars(){
+        return !listOfLoadedCars.isEmpty();
+    }
 
     public ArrayList<Car> getList(){
-        return listOfLoadedCars;
+        return this.listOfLoadedCars;
     }
+
 
     public void loadingCar(Car car) {
-        listOfLoadedCars.add(car);
+        if (listOfLoadedCars.size() < MAX_CARS) {
+            listOfLoadedCars.add(car);
+            car.setX(position.getX());
+            car.setY(position.getY());
+        }
+        
     }
 
-    public void removingCar(Car car){
-        Car removed_car = null;
+    public Car removingCar(){
+        if (!listOfLoadedCars.isEmpty()){
+            return listOfLoadedCars.remove(listOfLoadedCars.size()-1);
 
-        if (listOfLoadedCars.size() == 2){
-            removed_car = listOfLoadedCars.remove(1);
-            removedCarShouldEndUp(removed_car);
-
-        } else {
-
-            removed_car = listOfLoadedCars.remove(0);
-            removedCarShouldEndUp(removed_car);
-        }   
-        
+        }
+        return null;
     }
 
     public void removedCarShouldEndUp(Car car){
@@ -52,5 +61,30 @@ public class Contents {
         return pickMeUp;
     }
 
+    public void moveCarYcoordinate(double y){
+        ArrayList<Car> carsInList = getList();
+        if (carsInList.size() == 1){
+            Car car = carsInList.get(0);
+            car.setY(y);
+        } else if (carsInList.size() == 2){
+            Car firstCar = carsInList.get(0);
+            firstCar.setY(y);
+            Car secondCar = carsInList.get(1);
+            secondCar.setY(y);
+        }
+    }
+
+    public void moveCarXcoordinate(double x){
+    ArrayList<Car> carsInList = getList();
+    if (carsInList.size() == 1){
+        Car car = carsInList.get(0);
+        car.setY(x);
+    } else if (carsInList.size() == 2){
+        Car firstCar = carsInList.get(0);
+        firstCar.setY(x);
+        Car secondCar = carsInList.get(1);
+        secondCar.setY(x);
+    }
+    }
 
 } 

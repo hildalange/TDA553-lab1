@@ -58,17 +58,28 @@ public class CarTransporterTest {
     @Test
     public void carTransporter_should_not_be_able_to_lower_flatbed_while_moving(){
         CarTransporter transporter = new CarTransporter();
-        transporter.changeCurrentSpeed(5);;
+        transporter.changeCurrentSpeed(5);
         transporter.flatbedDown();
-        assertEquals(true, transporter.getFlatbedUp());
+        assertEquals(0, transporter.getPlatformAngle());
     }
 
     @Test
     public void if_flatbed_is_down_car_should_not_move(){
         CarTransporter transporter = new CarTransporter();
         transporter.flatbedDown();
-        transporter.gas(10);
+        transporter.gas(1);
         assertEquals(0, transporter.getCurrentSpeed());
     }
+
+    @Test
+    public void if_CT_has_a_car_car_should_move(){
+        CarTransporter transporter = new CarTransporter();
+        Saab95 carOne = new Saab95();
+        transporter.flatbedDown();
+        transporter.loadingCar(carOne);
+        transporter.setX(20);
+        assertEquals(20, carOne.getX());
+    }
+
 
 }

@@ -6,13 +6,13 @@ public class RepairShopTest {
    
     @Test
     public void repairShop_should_have_max_five_cars(){
-        RepairShop shop = new RepairShop(0, 0, 5, "Shop", Color.red);
-        assertEquals(5, shop.getMaximumOfCars());
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
+        assertEquals(2, shop.getMaximumOfCars());
     }
 
     @Test
     public void loadShopWithTwoCars() {
-        RepairShop shop = new RepairShop(0, 0, 5, "Shop", Color.red);
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
         Saab95 carOne = new Saab95();
         Volvo240 carTwo = new Volvo240();
         shop.loadingCar(carOne);
@@ -22,21 +22,19 @@ public class RepairShopTest {
     
     @Test
     public void remove_one_car_from_shop() {
-        RepairShop shop = new RepairShop(0, 0, 5, "Shop", Color.red);
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
         Saab95 carOne = new Saab95();
         Volvo240 carTwo = new Volvo240();
-        Saab95 carThree = new Saab95();
         shop.loadingCar(carOne);
         shop.loadingCar(carTwo);
-        shop.loadingCar(carThree);
-        System.out.println(shop.getList());
+        shop.getList();
         shop.removingCar();
-        assertEquals(2, shop.getList().size());
+        assertEquals(1, shop.getList().size());
     }
 
     @Test
     public void car_should_get_the_right_Ycoordinate(){
-        RepairShop shop = new RepairShop(0, 0, 5, "Shop", Color.red);
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
         Saab95 carOne = new Saab95();
         shop.loadingCar(carOne);
         shop.removingCar();
@@ -46,7 +44,7 @@ public class RepairShopTest {
 
     @Test
     public void carShop_could_not_load_more_cars_than_maximum(){
-        RepairShop shop = new RepairShop(0, 0, 2, "Shop", Color.red);
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
         Saab95 carOne = new Saab95();
         Volvo240 carTwo = new Volvo240();
         Saab95 carThree = new Saab95();
@@ -59,7 +57,7 @@ public class RepairShopTest {
 
     @Test
     public void if_carShop_unload_randomCar_a_new_can_be_load() {
-        RepairShop shop = new RepairShop(0, 0, 3, "Shop", Color.red);
+        RepairShop shop = new RepairShop(0, 0, "Shop", Color.red);
         Saab95 carOne = new Saab95();
         Volvo240 carTwo = new Volvo240();
         Volvo240 carThree = new Volvo240();
@@ -71,9 +69,9 @@ public class RepairShopTest {
         shop.loadingCar(carFour);
         assertEquals(true, shop.getList().contains(carFour));
     }
-
+    /* 
     @Test
-    public void same_list(){
+    public void same(){
         RepairShop shop = new RepairShop(0, 0, 2, "Shop", Color.red);
         CarTransporter transporter = new CarTransporter();
         Volvo240 carThree = new Volvo240();
@@ -83,6 +81,6 @@ public class RepairShopTest {
         transporter.loadingCar(carFour);
 
         assertEquals(1, shop.getList().size());
-        assertEquals(1, transporter.getList().size());
-    }
+        assertEquals(1, transporter.getNumberOfCars());
+    }*/
 }

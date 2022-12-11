@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public abstract class Vehicle implements Movable{
-
+public abstract class Vehicle implements Movable, IPositionable{
+    
     private final int nrDoors;
     private String modelName;
     private double currentSpeed;
@@ -59,11 +59,14 @@ public abstract class Vehicle implements Movable{
     public void stopEngine(){
 	    currentSpeed = 0;
     }
- 
+    
+    
+    @Override
     public double getX() {
         return x;
     }
- 
+    
+    @Override
     public double getY() {
         return y;
     }
@@ -123,9 +126,52 @@ public abstract class Vehicle implements Movable{
     public String getName() {
         return this.modelName;
     }
-    
-    public abstract void gas(double amount);
-    
-    public abstract void brake(double amount);
+
+    public boolean isGasValid(double amount){
+        
+        if (amount >= 0 && amount <= 1){
+            return true;
+        } else {
+            return false;
+        }
+   }
+
+    public void gas(double amount){
+       if (isGasValid(amount) == true){
+           incrementSpeed(amount);
+       }
+   }
+
+    private void incrementSpeed(double amount){
+    double newSpeed = getCurrentSpeed() + speedFactor() * amount;
+    changeCurrentSpeed(newSpeed);
+    if (getCurrentSpeed() < 0){
+        changeCurrentSpeed(0);
+    } else if (getCurrentSpeed() > getEnginePower()){
+        newSpeed = getEnginePower();
+        changeCurrentSpeed(newSpeed);
+    }
+    }
+
+    private void decrementSpeed(double amount){
+        double newSpeed = getCurrentSpeed() - speedFactor() * amount;
+        changeCurrentSpeed(newSpeed);
+
+        if (getCurrentSpeed() < 0){
+            changeCurrentSpeed(0);
+        } else if (getCurrentSpeed() > getEnginePower()){
+            newSpeed = getEnginePower();
+            changeCurrentSpeed(newSpeed);
+        }
+    }
+
+    public void brake(double amount){
+        if (isGasValid(amount) == true){
+            decrementSpeed(amount);
+        }
+    }
+
+    public abstract double speedFactor();
+
     
 }
