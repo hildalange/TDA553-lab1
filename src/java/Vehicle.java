@@ -127,15 +127,6 @@ public abstract class Vehicle implements Movable, IPositionable{
     public String getName() {
         return this.modelName;
     }
-/* 
-    public boolean isGasValid(double amount){
-        
-        if (amount >= 0 && amount <= 1){
-            return true;
-        } else {
-            return false;
-        }
-   }*/
 
     abstract boolean isGasValid(double amount);
 

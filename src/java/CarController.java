@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -21,13 +22,14 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of vehicle, modify if needed
-    ArrayList<Vehicle> vehicles  = new ArrayList<>();
+    List<Vehicle> vehicles = new ArrayList<>();
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+
 
         cc.vehicles.add(new Volvo240());
         cc.vehicles.add(new Saab95());

@@ -75,7 +75,4 @@ public class RepairShop implements IPositionable{
         int randomInt = rand.nextInt(upperboard);
         return randomInt;
     }
-    
-    
-
 }
