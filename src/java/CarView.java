@@ -42,8 +42,12 @@ public class CarView extends JFrame{
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
-        drawPanel = new DrawPanel(X, Y-240, carC.vehicles);
+        drawPanel = new DrawPanel(X, Y-240, carC.getList());
+        System.out.println("hiii");
+        button = new ButtonFactory();
         initComponents(framename);
+
+        System.out.println(button.getNumber());
     }
 
     // Sets everything in place and fits everything
@@ -54,7 +58,6 @@ public class CarView extends JFrame{
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(drawPanel);
 
 
@@ -78,28 +81,18 @@ public class CarView extends JFrame{
         this.add(gasPanel);
 
         controlPanel.setLayout(new GridLayout(2,4));
-
-        for (int i = 0; i < button.createTheButtons().size(); i++){
+        for (int i = 0; i < button.getNumber() ; i++){
             JButton currentButton = button.getButton(button.createTheButtons(), i);
             controlPanel.add(currentButton, i);
         }
 
-
-/* 
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-*/
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.white);
 
         JButton startButton = button.getLabelButton(button.createtheLabels(),0);
         JButton stopButton = button.getLabelButton(button.createtheLabels(),1);
-        JButton gasButton = button.createTheButtons().get(0);
+        JButton gasButton = button.getButton(button.createTheButtons(), 0);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);

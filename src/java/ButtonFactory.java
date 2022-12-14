@@ -5,9 +5,9 @@ import javax.swing.JButton;
 
 public class ButtonFactory {
  
-    ArrayList<String> namesOfButtons = (ArrayList<String>) Arrays.asList("Brake", "TurboOn", "TurboOff", "ScaniaLiftBed", "LowerLiftBed");
-    ArrayList<String> nameOfLabels = (ArrayList <String>) Arrays.asList("StartAllCars", "StopAllCars");
-    ArrayList<JButton> buttons = new ArrayList<>();
+    ArrayList<String> namesOfButtons = new ArrayList<>(Arrays.asList("Gas", "Brake", "TurboOn", "TurboOff", "ScaniaLiftBed", "LowerLiftBed"));
+    ArrayList<String> nameOfLabels = new ArrayList<>(Arrays.asList("StartAllCars", "StopAllCars"));
+    ArrayList<JButton> buttons = new ArrayList<JButton>();
     ArrayList<JButton> labelbuttons = new ArrayList<>();
 
     JButton CreateButton(String name){
@@ -44,8 +44,9 @@ public class ButtonFactory {
         return labelbuttons.get(i);
     }
 
-    public JButton createGasButton(){
-        JButton 
+    public int getNumber(){
+        int number = namesOfButtons.size();
+        return number;
     }
 
 
