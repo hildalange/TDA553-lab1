@@ -1,8 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.lang.Cloneable;
 
-public class Contents {
+public class Contents implements Cloneable {
     private static int MAX_CARS = 2;
     private ArrayList<Car> listOfLoadedCars = new ArrayList<Car>();
+    private ArrayList<Car> carsListClone = new ArrayList<Car>(); 
     private IPositionable position;
 
     public Contents(IPositionable p){
@@ -15,7 +18,11 @@ public class Contents {
     }
 
     public ArrayList<Car> getList(){
-        return this.listOfLoadedCars;
+        return carsListClone;
+    }
+
+    public void copyList(){
+        Collections.copy(listOfLoadedCars, carsListClone);
     }
 
 
@@ -61,30 +68,5 @@ public class Contents {
         return pickMeUp;
     }
 
-    public void moveCarYcoordinate(double y){
-        ArrayList<Car> carsInList = getList();
-        if (carsInList.size() == 1){
-            Car car = carsInList.get(0);
-            car.setY(y);
-        } else if (carsInList.size() == 2){
-            Car firstCar = carsInList.get(0);
-            firstCar.setY(y);
-            Car secondCar = carsInList.get(1);
-            secondCar.setY(y);
-        }
-    }
-
-    public void moveCarXcoordinate(double x){
-    ArrayList<Car> carsInList = getList();
-    if (carsInList.size() == 1){
-        Car car = carsInList.get(0);
-        car.setY(x);
-    } else if (carsInList.size() == 2){
-        Car firstCar = carsInList.get(0);
-        firstCar.setY(x);
-        Car secondCar = carsInList.get(1);
-        secondCar.setY(x);
-    }
-    }
 
 } 
