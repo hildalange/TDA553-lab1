@@ -70,4 +70,15 @@ public class CarTransporterTest {
         transporter.gas(1);
         assertEquals(0, transporter.getCurrentSpeed());
     }
+
+    @Test
+    public void see_if_list_is_copied(){
+        CarTransporter transporter = new CarTransporter();
+        Saab95 carOne = new Saab95();
+        Volvo240 carTwo = new Volvo240();
+        transporter.flatbedDown();
+        transporter.loadingCar(carOne);
+        transporter.loadingCar(carTwo);
+        assertEquals(2, transporter.getList().size());
+    }
 }

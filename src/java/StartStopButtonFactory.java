@@ -34,5 +34,10 @@ public class StartStopButtonFactory implements IButtonFactory {
     public JButton createTheButton(String name) {
         return new JButton(name);
     }
+
+    @Override
+    public ArrayList getList() {
+        return labelbuttons;
+    }
     
 }

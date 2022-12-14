@@ -34,5 +34,9 @@ public class ControllButtonFactory implements IButtonFactory {
     public JButton createTheButton(String name) {
         return new JButton(name);
     }
+
+    public ArrayList getList(){
+        return buttons;
+    }
     
 }

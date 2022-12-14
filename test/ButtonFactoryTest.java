@@ -4,9 +4,9 @@ public class ButtonFactoryTest {
     
     @Test
     public void createButtons(){
-        ButtonFactory factory = new ButtonFactory();
-        factory.createTheButtons();
-        assertEquals(5, factory.buttons.size());
+        IButtonFactory factory = new ControllButtonFactory();
+        factory.createButtons();
+        assertEquals(6,factory.getList().size());
     }
 
 }

@@ -2,6 +2,7 @@ import java.awt.*;
 
 public class Saab95 extends Car {
     private boolean turboOn;
+
     
     public Saab95(){
         super("Saab95", 2, 0, 125, Color.red, 0, 0);
@@ -27,4 +28,5 @@ public class Saab95 extends Car {
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
+
 }

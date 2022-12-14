@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -12,6 +13,10 @@ import java.util.List;
 
 public class CarController {
     // member fields:
+    Saab95 Saab95 = new Saab95();
+    Volvo240 Volvo240 = new Volvo240();
+    Scania Scania = new Scania();
+
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
@@ -26,11 +31,12 @@ public class CarController {
 
     //methods:
 
+
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
-        vehicles.add(new Volvo240());
+        vehicles.add(new Saab95());
         vehicles.add(new Saab95());
         vehicles.add(new Scania());
 

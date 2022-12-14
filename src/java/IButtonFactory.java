@@ -7,5 +7,5 @@ public interface IButtonFactory {
     ArrayList createButtons();
     int getNumber();
     JButton createTheButton(String name);
-
+    ArrayList getList();
 }
