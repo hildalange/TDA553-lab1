@@ -33,7 +33,7 @@ public class DrawPanel extends JPanel{
     public DrawPanel(int x, int y, List<Vehicle> vehicles) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.white);
+        this.setBackground(Color.pink);
 
         for (Vehicle car: vehicles){
             Point p = new Point((int) car.getX(),(int) car.getY());

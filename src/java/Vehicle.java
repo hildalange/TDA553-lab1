@@ -10,7 +10,7 @@ public abstract class Vehicle implements Movable, IPositionable{
     private double x;
     private double y; 
     private double[]direction = new double[]{x,y};
-    private int currentdirection = 0;
+    private int currentdirection = 1;
  
     public Vehicle(String modelName, int nrDoors, double currentSpeed, double enginePower, Color color, double x, double y){
         this.modelName = modelName;

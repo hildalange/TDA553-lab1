@@ -16,7 +16,8 @@ import java.awt.event.ActionListener;
 public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
-    ButtonFactory button;
+    IButtonFactory button;
+    IButtonFactory labelbutton;
     // The controller member
     CarController carC;
 
@@ -44,7 +45,8 @@ public class CarView extends JFrame{
         this.carC = cc;
         drawPanel = new DrawPanel(X, Y-240, carC.getList());
         System.out.println("hiii");
-        button = new ButtonFactory();
+        button = new ControllButtonFactory();
+        labelbutton = new StartStopButtonFactory();
         initComponents(framename);
 
         System.out.println(button.getNumber());
@@ -82,7 +84,7 @@ public class CarView extends JFrame{
 
         controlPanel.setLayout(new GridLayout(2,4));
         for (int i = 0; i < button.getNumber() ; i++){
-            JButton currentButton = button.getButton(button.createTheButtons(), i);
+            JButton currentButton = button.getButton(button.createButtons(), i);
             controlPanel.add(currentButton, i);
         }
 
@@ -90,9 +92,9 @@ public class CarView extends JFrame{
         this.add(controlPanel);
         controlPanel.setBackground(Color.white);
 
-        JButton startButton = button.getLabelButton(button.createtheLabels(),0);
-        JButton stopButton = button.getLabelButton(button.createtheLabels(),1);
-        JButton gasButton = button.getButton(button.createTheButtons(), 0);
+        JButton startButton = labelbutton.getButton(labelbutton.createButtons(), 0);
+        JButton stopButton = labelbutton.getButton(labelbutton.createButtons(),1);
+        JButton gasButton = button.getButton(button.createButtons(), 0);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
