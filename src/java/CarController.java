@@ -7,6 +7,7 @@ import javax.swing.event.ChangeListener;
 
 public class CarController extends JPanel{
     // member fields:
+    private static final int delay = 50;
     private static final int x = 800;
     private static final int y = 800;
     JSpinner gasSpinner = new JSpinner();
@@ -19,7 +20,9 @@ public class CarController extends JPanel{
     JLabel gasLabel = new JLabel("Amount of gas");
     int gasAmount = 0;
     JPanel controlPanel = new JPanel();
-    CarModel model;
+    private static CarModel model;
+    private static DrawPanel drawView;
+
 
     public CarController(CarModel model){
         this.model = model;
