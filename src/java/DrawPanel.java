@@ -1,10 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
  
@@ -13,12 +10,10 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     CarController cc;
+    private CarModel model;
     ArrayList<Vehicle> cars;
     ArrayList<Point> pointsOfVehicles = new ArrayList<>();
     ArrayList<BufferedImage> imageOfCars = new ArrayList<>();
-
-    
-    // Just a single image, TODO: Generalize
     BufferedImage image;
 
     void moveit(int x, int y, int indexOfVehicle){
@@ -28,14 +23,13 @@ public class DrawPanel extends JPanel{
     }
 
 
- 
-    // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, List<Vehicle> vehicles) {
-        this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.pink);
+    public DrawPanel(int x, int y, CarModel model) {
+        this.model = model;
+        setDoubleBuffered(true);
+        setPreferredSize(new Dimension(x, y));
+        setBackground(Color.pink);
 
-        for (Vehicle car: vehicles){
+        for (Vehicle car: model.vehicles){
             Point p = new Point((int) car.getX(),(int) car.getY());
             pointsOfVehicles.add(p);
             try {
@@ -61,7 +55,9 @@ public class DrawPanel extends JPanel{
             Point p = pointsOfVehicles.get(imageOfCars.indexOf(pic));
             g.drawImage( pic , (int) p.x , (int) p.y, null);
         }
+    }
 
-         // see javadoc for more info on the parameters
+    public void update(){
+        repaint();
     }
 }

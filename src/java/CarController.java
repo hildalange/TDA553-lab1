@@ -1,77 +1,94 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-/*
-* This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
- */
-
-public class CarController {
+public class CarController extends JPanel{
     // member fields:
+    private static final int x = 800;
+    private static final int y = 800;
+    JSpinner gasSpinner = new JSpinner();
     Saab95 Saab95 = new Saab95();
     Volvo240 Volvo240 = new Volvo240();
     Scania Scania = new Scania();
+    ControllButtonFactory button;
+    StartStopButtonFactory labelbutton;
+    JPanel gasPanel = new JPanel();
+    JLabel gasLabel = new JLabel("Amount of gas");
+    int gasAmount = 0;
+    JPanel controlPanel = new JPanel();
+    CarModel model;
 
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
-    // A list of vehicle, modify if needed
-    private static List<Vehicle> vehicles = new ArrayList<>();
-
-    //methods:
-
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        vehicles.add(new Saab95());
-        vehicles.add(new Saab95());
-        vehicles.add(new Scania());
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
+    public CarController(CarModel model){
+        this.model = model;
+        button = new ControllButtonFactory();
+        labelbutton = new StartStopButtonFactory();
+        initComponents();
     }
 
-    /* Each step the TimerListener moves all the vehicle in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : vehicles) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                int i = (int) vehicles.indexOf(car);
-                frame.drawPanel.moveit(x, y, i);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+    private void initComponents(){
+                SpinnerModel spinnerModel =
+                new SpinnerNumberModel(0, //initial value
+                        0, //min
+                        100, //max
+                        1);//step
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
+        });
+
+        gasPanel.setLayout(new BorderLayout());
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        this.add(gasPanel);
+
+        controlPanel.setLayout(new GridLayout(2,4));
+        for (int i = 0; i < button.getNumber() ; i++){
+            JButton currentButton = button.getButton(button.createButtons(), i);
+            controlPanel.add(currentButton, i);
         }
+        
+        controlPanel.setLayout(new GridLayout(2,4));
+        for (int i = 0; i < button.getNumber() ; i++){
+            JButton currentButton = button.getButton(button.createButtons(), i);
+            controlPanel.add(currentButton, i);
+        }
+
+        controlPanel.setPreferredSize(new Dimension((x/2)+4, 200));
+        this.add(controlPanel);
+        controlPanel.setBackground(Color.white);
+
+        JButton startButton = labelbutton.getButton(labelbutton.createButtons(), 0);
+        JButton stopButton = labelbutton.getButton(labelbutton.createButtons(),1);
+        JButton gasButton = button.getButton(button.createButtons(), 0);
+
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(x/5-15,200));
+        this.add(startButton);
+
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(x/5-15,200));
+        this.add(stopButton);
+
+        gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gas(gasAmount);
+            }
+        });
     }
 
-    // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : vehicles) {
+        for (Vehicle car : model.vehicles ) {
             car.gas(gas);
         }
     }
-
-    public List getList(){
-        return vehicles;
-    }
+    
 }
