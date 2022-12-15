@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.lang.Cloneable;
 
-public class CarTransporter extends Truck implements Cloneable{
+public class CarTransporter extends Truck{
 
     private Contents carTransporterContents;
     private CarTransportFlatbed ctFlatbed;
@@ -11,19 +10,6 @@ public class CarTransporter extends Truck implements Cloneable{
         super("CarTransporter", 2, 0, 125, Color.blue, 0, 0);
         this.carTransporterContents = new Contents(this);
         this.ctFlatbed = new CarTransportFlatbed();
-
-    }
-    
-    @Override
-    public CarTransporter clone() {
-        CarTransporter clonedCarTransporter = null;
-        try {
-            clonedCarTransporter = (CarTransporter) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
- 
-        return clonedCarTransporter;
     }
 
     public double getFlatbedAngle(){
@@ -90,4 +76,5 @@ public class CarTransporter extends Truck implements Cloneable{
             return false;
         }
     }
+
 }

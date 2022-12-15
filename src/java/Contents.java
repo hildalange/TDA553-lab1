@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.lang.Cloneable;
+import java.util.List;
 
-public class Contents implements Cloneable {
+public class Contents {
     private static int MAX_CARS = 2;
-    private ArrayList<Car> listOfLoadedCars = new ArrayList<Car>();
-    private ArrayList<Car> carsListClone = new ArrayList<Car>(); 
+    private List<Car> listOfLoadedCars = new ArrayList<>();
     private IPositionable position;
 
     public Contents(IPositionable p){
@@ -13,22 +11,24 @@ public class Contents implements Cloneable {
         this.position = p;
     }
 
+    public static <T> List<T> defensiveCopy(List<T> listOfLoadedCars) {
+        return listOfLoadedCars != null && listOfLoadedCars.size() > 0 ? new ArrayList<>(listOfLoadedCars)
+                : new ArrayList<>();
+    }
+
     public boolean hasCars(){
         return !listOfLoadedCars.isEmpty();
     }
 
     public ArrayList<Car> getList(){
-        return carsListClone;
-    }
-
-    public void copyList(){
-        Collections.copy(listOfLoadedCars, carsListClone);
+        return (ArrayList<Car>) defensiveCopy(listOfLoadedCars);
     }
 
 
     public void loadingCar(Car car) {
         if (listOfLoadedCars.size() < MAX_CARS) {
             listOfLoadedCars.add(car);
+
             car.setX(position.getX());
             car.setY(position.getY());
         }
@@ -67,6 +67,16 @@ public class Contents implements Cloneable {
         
         return pickMeUp;
     }
-
-
+   
+    @Override
+    public Car clone() {
+        Car clonedCarTransporter = null;
+        try {
+            clonedCarTransporter = (Car) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+ 
+        return clonedCarTransporter;
+    }
 } 
